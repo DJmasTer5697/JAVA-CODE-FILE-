@@ -1,0 +1,37 @@
+//Java program that demonstrates importing classes from another package
+
+//StudentInfo.java (inside student package)
+
+package student;
+
+public class StudentInfo {
+    private int rollNo;
+    private String name;
+
+    public StudentInfo(int rollNo, String name) {
+        this.rollNo = rollNo;
+        this.name = name;
+    }
+
+    public void display() {
+        System.out.println("Roll No: " + rollNo);
+        System.out.println("Name: " + name);
+    }
+}
+
+
+//MainClass.java (inside main package)
+
+package main;
+import student.StudentInfo;
+
+public class MainClass {
+    public static void main(String[] args) {
+        StudentInfo s1 = new StudentInfo(101, "Nitesh Kumar");
+        s1.display();
+    }
+}
+
+
+
+
