@@ -1,0 +1,73 @@
+//Create a class “Account” containing account No, and balance as an instance variable. Derive the Account class into two classes named “Savings” and “Current”. The “Savings” class
+should contain instance variable named interest Rate, and the “Current” class should contain instance variable called overdraft Limit. Define appropriate methods for all the classes to enable functionalities to check balance, deposit, and withdraw amount in Savings and Current account.
+
+
+code :-
+  class Account {
+    int accountNo;
+    double balance;
+
+    Account(int accountNo, double balance) {
+        this.accountNo = accountNo;
+        this.balance = balance;
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+    }
+
+    void withdraw(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
+        } else {
+            System.out.println("Insufficient Balance");
+        }
+    }
+
+    void checkBalance() {
+        System.out.println("Account No: " + accountNo + ", Balance: " + balance);
+    }
+}
+
+class Savings extends Account {
+    double interestRate;
+
+    Savings(int accountNo, double balance, double interestRate) {
+        super(accountNo, balance);
+        this.interestRate = interestRate;
+    }
+
+    void addInterest() {
+        balance += balance * (interestRate / 100);
+    }
+}
+
+class Current extends Account {
+    double overdraftLimit;
+
+    Current(int accountNo, double balance, double overdraftLimit) {
+        super(accountNo, balance);
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    void withdraw(double amount) {
+        if (amount <= balance + overdraftLimit) {
+            balance -= amount;
+        } else {
+            System.out.println("Overdraft Limit Exceeded");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Savings s = new Savings(1001, 5000, 5);
+        s.deposit(2000);
+        s.addInterest();
+        s.checkBalance();
+
+        Current c = new Current(2002, 3000, 1000);
+        c.withdraw(3500);
+        c.checkBalance();
+    }
+}
